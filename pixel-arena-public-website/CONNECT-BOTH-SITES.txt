@@ -1,0 +1,17 @@
+PIXEL ARENA: CONNECT THE PUBLIC SITE AND OWNER PORTAL
+
+Current state
+The two supplied pages are standalone demos. Court booking enquiries open WhatsApp; the owner portal keeps settings in that browser's localStorage. They do not currently share bookings or offers.
+
+Backend setup (Supabase)
+1. Create a Supabase project.
+2. In SQL Editor, run supabase-setup.sql.
+3. In Authentication > Users, create the owner's account. Disable public sign-up so visitors cannot create owner accounts.
+4. Copy the project URL and publishable/anon key from the project's Connect dialog.
+5. Copy supabase-config.example.js to supabase-config.js in BOTH website folders and fill in those same two values.
+6. Deploy both folders over HTTPS. The public website and owner portal can use different domains; they connect to the same Supabase project.
+
+What remains to finish
+The database and security rules are prepared, but the current pages still need their booking form, owner booking list/login, and offer controls wired to Supabase. This cannot be safely completed as a live connection until the project's URL/key are available and the owner login email is known. Do not send a Supabase secret/service_role key; it must remain private on a server.
+
+The owner account email should be the only account permitted to log into the owner portal. The SQL starter policies are suitable only while public sign-up is disabled and this project has one trusted owner account. Tighten policies to the owner's user ID before allowing additional authenticated users.
