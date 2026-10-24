@@ -1,5 +1,7 @@
-PIXEL ARENA WEBSITE
+PIXEL ARENA PUBLIC WEBSITE
 
-Deploy: upload this folder to your static hosting or push index.html to a Git repository and import it into Vercel.
+Deploy the complete folder to HTTPS static hosting (for example Vercel). Keep supabase-config.js beside index.html. The supplied Supabase publishable key is intended for browser use; the database policies in supabase-setup.sql protect records.
 
-Sports images are embedded in index.html. UPI payment helper shows a QR code and UPI ID; scan and enter the displayed amount. Payment is not automatically verified.
+Before launch, run supabase-setup.sql in the Supabase SQL Editor and create the private owner account. Full steps are in CONNECT-BOTH-SITES.txt.
+
+Court booking requests are saved to Supabase as pending, and active offers are read from Supabase. The venue must still confirm availability. Cafe orders use WhatsApp. Court availability and automatic offer discounts are not implemented. UPI payments are not automatically verified.

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://artpower28487-collab.github.io/pixel-arena/sitemap.xml

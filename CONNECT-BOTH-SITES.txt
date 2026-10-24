@@ -1,17 +1,15 @@
-PIXEL ARENA: CONNECT THE PUBLIC SITE AND OWNER PORTAL
+PIXEL ARENA: FINISH THE SUPABASE CONNECTION
 
-Current state
-The two supplied pages are standalone demos. Court booking enquiries open WhatsApp; the owner portal keeps settings in that browser's localStorage. They do not currently share bookings or offers.
+The two site folders now contain Supabase integration code and the same project URL/publishable key. Booking requests are submitted as pending, the owner portal reads and updates their status, and active offers are published to the public website. The publishable key is designed for browser use; no secret/service-role key is used.
 
-Backend setup (Supabase)
-1. Create a Supabase project.
-2. In SQL Editor, run supabase-setup.sql.
-3. In Authentication > Users, create the owner's account. Disable public sign-up so visitors cannot create owner accounts.
-4. Copy the project URL and publishable/anon key from the project's Connect dialog.
-5. Copy supabase-config.example.js to supabase-config.js in BOTH website folders and fill in those same two values.
-6. Deploy both folders over HTTPS. The public website and owner portal can use different domains; they connect to the same Supabase project.
+Finish setup in Supabase
+1. Open the Supabase project whose URL is in supabase-config.js.
+2. Open SQL Editor, paste the full contents of supabase-setup.sql, and run it. This creates the bookings/offers tables, access policies, and live booking updates.
+3. In Authentication settings, disable public sign-ups.
+4. In Authentication > Users, create/confirm the owner account artpower28487@gmail.com. Set its password to PixelArena-<PIN>-Portal! using a private 8–12 digit PIN. Example: PIN 12345678 means account password PixelArena-12345678-Portal!
+5. The owner portal asks only for that PIN; it uses the owner email internally for Supabase sign-in. Do not use the old demo PIN 6527. Keep the chosen PIN private.
+6. Deploy each complete site folder over HTTPS. Keep supabase-config.js beside its index.html. Do not deploy only the standalone HTML file: browser-to-Supabase requests need an HTTPS website origin.
 
-What remains to finish
-The database and security rules are prepared, but the current pages still need their booking form, owner booking list/login, and offer controls wired to Supabase. This cannot be safely completed as a live connection until the project's URL/key are available and the owner login email is known. Do not send a Supabase secret/service_role key; it must remain private on a server.
 
-The owner account email should be the only account permitted to log into the owner portal. The SQL starter policies are suitable only while public sign-up is disabled and this project has one trusted owner account. Tighten policies to the owner's user ID before allowing additional authenticated users.
+Current limits
+Forgot PIN sends a Supabase recovery email to the configured owner email; it can contain a code or a link depending on the Supabase Reset Password email template. For recovery links, configure the deployed HTTPS portal URL in Supabase Auth URL settings. The booking request starts as pending; the venue still confirms it. Cafe orders continue to use WhatsApp. Court availability and rates in the owner portal remain browser-local and are not synchronized. The public page does not yet reserve/lock a slot or automatically apply an offer discount to the estimate.
